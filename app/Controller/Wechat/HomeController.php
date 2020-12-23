@@ -1,0 +1,21 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Controller\Wechat;
+
+use App\Controller\AbstractController;
+
+class HomeController extends AbstractController
+{
+    public function index()
+    {
+        $user = $this->request->input('user', 'Hyperf');
+        $method = $this->request->getMethod();
+
+        return [
+            'method' => $method,
+            'message' => "Hello {$user}.",
+        ];
+    }
+}
