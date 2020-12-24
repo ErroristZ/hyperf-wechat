@@ -11,7 +11,7 @@ declare(strict_types=1);
  */
 use Hyperf\HttpServer\Router\Router;
 
-Router::get('/test', 'App\Controller\Wechat\HomeController@index');
+Router::get('/Wechat/index', 'App\Controller\Wechat\HomeController@index');
 Router::get('/index', 'App\Controller\IndexController@index');
 Router::post('/login', 'App\Controller\IndexController@login');
 

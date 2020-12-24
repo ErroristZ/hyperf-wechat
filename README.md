@@ -34,4 +34,3 @@ $ php bin/hyperf.php start
 This will start the cli-server on port `9501`, and bind it to all network interfaces. You can then visit the site at `http://localhost:9501/`
 
 which will bring up Hyperf default home page.
-# hyperf-wechat
