@@ -6,7 +6,7 @@ namespace App\Request\Admin\System;
 
 use Hyperf\Validation\Request\FormRequest;
 
-class Permission extends FormRequest
+class PermissionResquest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

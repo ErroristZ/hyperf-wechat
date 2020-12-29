@@ -15,6 +15,8 @@ use Hyperf\Di\Annotation\Inject;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Hyperf\HttpServer\Contract\ResponseInterface;
 use Psr\Container\ContainerInterface;
+use Hyperf\Contract\LengthAwarePaginatorInterface;
+
 
 abstract class AbstractController
 {
@@ -35,4 +37,20 @@ abstract class AbstractController
      * @var ResponseInterface
      */
     protected $response;
+
+    public function getPaginateData(LengthAwarePaginatorInterface $paginateData)
+    {
+        return [
+            'data' => $paginateData->items(),
+            'pageNo' => $paginateData->currentPage(),
+            'lastPage' => $paginateData->lastPage(),
+            'totalCount' => $paginateData->total(),
+            'pageSize' => $paginateData->perPage()
+        ];
+    }
+
+    public function getPageSize()
+    {
+        return $this->request->input('pageSize') == null ? 10 : (int)$this->request->input('pageSize');
+    }
 }

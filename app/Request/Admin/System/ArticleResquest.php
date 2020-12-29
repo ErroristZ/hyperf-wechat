@@ -21,8 +21,35 @@ class ArticleResquest extends FormRequest
      */
     public function rules(): array
     {
-        return [
+        switch ($this->getMethod())
+        {
+            case 'POST':
+                return $this->getRegisterRules();
+                break;
+            case 'PATCH':
+                return $this->getUpdateRules();
+                break;
+        }
+    }
 
+    public function attributes(): array
+    {
+        return [
+            'id' => 'ID',
+        ];
+    }
+
+    private function getRegisterRules()
+    {
+        return  [
+            'id' => 'required|max:10',
+        ];
+    }
+
+    private function getUpdateRules()
+    {
+        return  [
+            'id' => 'required|max:10',
         ];
     }
 }
