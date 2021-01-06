@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Model;
-
 
 class ModelBase extends Model implements ModelInterface
 {

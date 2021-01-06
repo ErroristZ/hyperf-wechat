@@ -11,13 +11,16 @@ declare(strict_types=1);
  */
 use Hyperf\HttpServer\Router\Router;
 
+Router::addRoute(['GET', 'POST', 'HEAD'], '/', 'App\Controller\IndexController@index');
+
 //后端登录
 Router::post('/login', 'App\Controller\Admin\AuthController@login');
 Router::addGroup('/auth', function () {
     Router::post('/login', 'App\Controller\Admin\AuthController@login');
 });
 
-Router::get('/article/list', 'App\Controller\Admin\System\Article@list');
+Router::addRoute(['GET', 'POST', 'HEAD'], '/wechat/index', 'App\Controller\Wechat\HomeController@serve');
+Router::addRoute(['GET', 'POST', 'HEAD'], '/wechat/getWxPic', 'App\Controller\Wechat\HomeController@getWxPic');
 
 //后端路由
 Router::addGroup('/auth', function () {
@@ -35,13 +38,17 @@ Router::addGroup('/permission', function () {
 
 //后端文章
 Router::addGroup('/article', function () {
+    Router::get('/category', 'App\Controller\Admin\System\ArticleCategoryController@list');
+    Router::post('/category', 'App\Controller\Admin\System\ArticleCategoryController@create');
+    Router::put('/category/{id}', 'App\Controller\Admin\System\ArticleCategoryController@update');
+    Router::delete('/category/{id}', 'App\Controller\Admin\System\ArticleCategoryController@delete');
+
     Router::get('', 'App\Controller\Admin\System\ArticleController@list');
     Router::post('/{id}', 'App\Controller\Admin\System\ArticleController@create');
     Router::get('/{id}', 'App\Controller\Admin\System\ArticleController@info');
     Router::delete('/{id}', 'App\Controller\Admin\System\ArticleController@delete');
-    Router::patch('/{id}', 'App\Controller\Admin\System\ArticleController@update');
+    Router::put('/{id}', 'App\Controller\Admin\System\ArticleController@update');
 }, ['middleware' => [Phper666\JWTAuth\Middleware\JWTAuthMiddleware::class]]);
-
 
 
 Router::addGroup('/v1', function () {

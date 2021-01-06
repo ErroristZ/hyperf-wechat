@@ -26,7 +26,7 @@ class ArticleResquest extends FormRequest
             case 'POST':
                 return $this->getRegisterRules();
                 break;
-            case 'PATCH':
+            case 'PUT':
                 return $this->getUpdateRules();
                 break;
         }
@@ -42,14 +42,22 @@ class ArticleResquest extends FormRequest
     private function getRegisterRules()
     {
         return  [
-            'id' => 'required|max:10',
+            'category_id' => 'required|max:10',
+            'content' => 'required|string|between:2,5000',
+            'image' => 'required|string|between:2,100',
+            'title' => 'nullable|string|between:2,100',
+            'top' => 'required|max:2',
         ];
     }
 
     private function getUpdateRules()
     {
         return  [
-            'id' => 'required|max:10',
+            'category_id' => 'required|max:10',
+            'content' => 'required|string|between:2,5000',
+            'image' => 'required|string|between:2,100',
+            'title' => 'nullable|string|between:2,100',
+            'top' => 'required|max:2',
         ];
     }
 }

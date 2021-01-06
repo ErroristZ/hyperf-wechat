@@ -6,12 +6,6 @@ namespace App\Controller\Admin\System;
 
 use App\Controller\AbstractController;
 use App\Model\Article;
-use App\Request\Admin\System\ArticleResquest;
-use Phper666\JWTAuth\JWT;
-use Hyperf\HttpServer\Annotation\Controller;
-use Hyperf\HttpServer\Annotation\PostMapping;
-use Hyperf\HttpServer\Contract\RequestInterface;
-use Hyperf\HttpServer\Contract\ResponseInterface;
 
 class PermissionController extends AbstractController
 {

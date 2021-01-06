@@ -1,33 +1,46 @@
 <?php
 
 declare (strict_types=1);
-
 namespace App\Model;
 
-//use Donjan\Permission\Traits\HasRoles;
 use Hyperf\DbConnection\Model\Model;
 use Hyperf\HttpServer\Contract\RequestInterface;
-
 /**
+ * @property int $id 
+ * @property string $name 
+ * @property string $password 
+ * @property string $hash 
+ * @property string $nickname 
+ * @property int $dept_id 
+ * @property int $status 
+ * @property string $avatar 
+ * @property string $email 
+ * @property int $create_time 
+ * @property int $update_time 
+ * @property int $delete_time 
  */
 class User extends Model
 {
-//    use HasRoles;
     /**
+     * The table associated with the model.
      *
      * @var string
      */
     protected $table = 'user';
-
-    protected $fillable = ['id', 'name', 'password', 'hash', 'nickname',
-        'dept_id', 'status', 'avatar', 'email', 'create_time', 'update_time', 'delete_time'
-    ];
-
     /**
+     * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $casts = [];
+    protected $fillable = ['id', 'name', 'password', 'hash', 'nickname',
+        'dept_id', 'status', 'avatar', 'email', 'create_time', 'update_time', 'delete_time'
+    ];
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = ['id' => 'integer', 'dept_id' => 'integer', 'status' => 'integer', 'create_time' => 'integer', 'update_time' => 'integer', 'delete_time' => 'integer'];
 
     protected $hidden=['password'];
 

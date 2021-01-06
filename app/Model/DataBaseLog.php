@@ -12,4 +12,5 @@ use Hyperf\HttpServer\Contract\RequestInterface;
 class DataBaseLog extends Model
 {
 
+
 }
