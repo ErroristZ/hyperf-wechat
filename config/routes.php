@@ -38,11 +38,13 @@ Router::addGroup('/permission', function () {
 
 //后端文章
 Router::addGroup('/article', function () {
+    //分类列表
     Router::get('/category', 'App\Controller\Admin\System\ArticleCategoryController@list');
     Router::post('/category', 'App\Controller\Admin\System\ArticleCategoryController@create');
     Router::put('/category/{id}', 'App\Controller\Admin\System\ArticleCategoryController@update');
     Router::delete('/category/{id}', 'App\Controller\Admin\System\ArticleCategoryController@delete');
 
+    //文章列表
     Router::get('', 'App\Controller\Admin\System\ArticleController@list');
     Router::post('/{id}', 'App\Controller\Admin\System\ArticleController@create');
     Router::get('/{id}', 'App\Controller\Admin\System\ArticleController@info');
@@ -50,6 +52,13 @@ Router::addGroup('/article', function () {
     Router::put('/{id}', 'App\Controller\Admin\System\ArticleController@update');
 }, ['middleware' => [Phper666\JWTAuth\Middleware\JWTAuthMiddleware::class]]);
 
+//管理员日志
+Router::addGroup('/log', function () {
+    //管理员日志列表
+    Router::get('/acount', 'App\Controller\Admin\Log\AccountLogController@list');
+    Router::delete('/acount', 'App\Controller\Admin\Log\AccountLogController@delete');
+    Router::get('/db', 'App\Controller\Admin\Log\DataBaseLogController@list');
+    Router::delete('/db', 'App\Controller\Admin\Log\DataBaseLogController@delete');
 
 Router::addGroup('/v1', function () {
     //刷新token
