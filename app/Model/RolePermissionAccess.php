@@ -5,17 +5,17 @@ namespace App\Model;
 
 use Hyperf\DbConnection\Model\Model;
 /**
- * @property int $user_id 
- * @property int $post_id 
+ * @property int $role_id 
+ * @property int $permission_id 
  */
-class UserPostAccess extends Model
+class RolePermissionAccess extends Model
 {
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'user_post_access';
+    protected $table = 'role_permission_access';
     /**
      * The attributes that are mass assignable.
      *
@@ -27,5 +27,5 @@ class UserPostAccess extends Model
      *
      * @var array
      */
-    protected $casts = ['user_id' => 'integer', 'post_id' => 'integer'];
+    protected $casts = ['role_id' => 'integer', 'permission_id' => 'integer'];
 }

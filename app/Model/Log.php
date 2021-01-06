@@ -5,17 +5,24 @@ namespace App\Model;
 
 use Hyperf\DbConnection\Model\Model;
 /**
+ * @property int $id 
  * @property int $user_id 
- * @property int $post_id 
+ * @property string $action 
+ * @property string $url 
+ * @property string $ip 
+ * @property string $user_agent 
+ * @property int $create_time 
+ * @property int $update_time 
+ * @property int $delete_time 
  */
-class UserPostAccess extends Model
+class Log extends Model
 {
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'user_post_access';
+    protected $table = 'log';
     /**
      * The attributes that are mass assignable.
      *
@@ -27,5 +34,5 @@ class UserPostAccess extends Model
      *
      * @var array
      */
-    protected $casts = ['user_id' => 'integer', 'post_id' => 'integer'];
+    protected $casts = ['id' => 'integer', 'user_id' => 'integer', 'create_time' => 'integer', 'update_time' => 'integer', 'delete_time' => 'integer'];
 }

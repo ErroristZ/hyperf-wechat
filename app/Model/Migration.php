@@ -5,17 +5,20 @@ namespace App\Model;
 
 use Hyperf\DbConnection\Model\Model;
 /**
- * @property int $user_id 
- * @property int $post_id 
+ * @property int $version 
+ * @property string $migration_name 
+ * @property string $start_time 
+ * @property string $end_time 
+ * @property int $breakpoint 
  */
-class UserPostAccess extends Model
+class Migration extends Model
 {
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'user_post_access';
+    protected $table = 'migrations';
     /**
      * The attributes that are mass assignable.
      *
@@ -27,5 +30,5 @@ class UserPostAccess extends Model
      *
      * @var array
      */
-    protected $casts = ['user_id' => 'integer', 'post_id' => 'integer'];
+    protected $casts = ['version' => 'integer', 'breakpoint' => 'integer'];
 }
