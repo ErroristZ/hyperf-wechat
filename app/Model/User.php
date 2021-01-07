@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace App\Model;
 
-use Hyperf\DbConnection\Model\Model;
+use Hyperf\Database\Model\SoftDeletes;
 use Hyperf\HttpServer\Contract\RequestInterface;
 /**
  * @property int $id 
@@ -19,7 +19,7 @@ use Hyperf\HttpServer\Contract\RequestInterface;
  * @property int $update_time 
  * @property int $delete_time 
  */
-class User extends Model
+class User extends ModelBase implements ModelInterface
 {
     /**
      * The table associated with the model.
@@ -27,6 +27,18 @@ class User extends Model
      * @var string
      */
     protected $table = 'user';
+
+    use SoftDeletes;
+
+    protected $dateFormat = 'U';
+
+    const CREATED_AT = 'create_time';
+
+    const UPDATED_AT = 'update_time';
+
+    //必须为null
+    const DELETED_AT = 'delete_time';
+
     /**
      * The attributes that are mass assignable.
      *

@@ -1,14 +1,7 @@
 <?php
 
 declare(strict_types=1);
-/**
- * This file is part of Hyperf.
- *
- * @link     https://www.hyperf.io
- * @document https://hyperf.wiki
- * @contact  group@hyperf.io
- * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
- */
+
 use Hyperf\HttpServer\Router\Router;
 
 Router::addRoute(['GET', 'POST', 'HEAD'], '/', 'App\Controller\IndexController@index');
@@ -59,6 +52,51 @@ Router::addGroup('/log', function () {
     Router::delete('/acount', 'App\Controller\Admin\Log\AccountLogController@delete');
     Router::get('/db', 'App\Controller\Admin\Log\DataBaseLogController@list');
     Router::delete('/db', 'App\Controller\Admin\Log\DataBaseLogController@delete');
+}, ['middleware' => [Phper666\JWTAuth\Middleware\JWTAuthMiddleware::class]]);
+
+
+//系统管理
+Router::addGroup('/system', function () {
+    //部门列表
+    Router::get('/dept', 'App\Controller\Admin\System\DeptController@list');
+    Router::post('/dept', 'App\Controller\Admin\System\DeptController@create');
+    Router::put('/dept/{id}', 'App\Controller\Admin\System\DeptController@update');
+    Router::delete('/dept/{id}', 'App\Controller\Admin\System\DeptController@delete');
+
+    //岗位列表
+    Router::get('/post', 'App\Controller\Admin\System\PostController@all');
+    Router::post('/post', 'App\Controller\Admin\System\PostController@create');
+    Router::put('/post/{id}', 'App\Controller\Admin\System\PostController@update');
+    Router::delete('/post/{id}', 'App\Controller\Admin\System\PostController@delete');
+}, ['middleware' => [Phper666\JWTAuth\Middleware\JWTAuthMiddleware::class]]);
+
+
+//角色管理
+Router::addGroup('/role', function () {
+    //角色列表
+    Router::get('', 'App\Controller\Admin\System\RoleController@list');
+    Router::post('', 'App\Controller\Admin\System\RoleController@create');
+    Router::get('/all', 'App\Controller\Admin\System\RoleController@all');
+    Router::put('/{id}', 'App\Controller\Admin\System\RoleController@update');
+    Router::delete('/{id}/mode', 'App\Controller\Admin\System\RoleController@mode');
+}, ['middleware' => [Phper666\JWTAuth\Middleware\JWTAuthMiddleware::class]]);
+
+//用户管理
+Router::addGroup('/user', function () {
+    //用户列表
+    Router::get('/data', 'App\Controller\Admin\System\UserController@data');
+    Router::get('/current', 'App\Controller\Admin\System\UserController@current');
+    Router::put('/current', 'App\Controller\Admin\System\UserController@updateCurrent');
+    Router::post('/avatar', 'App\Controller\Admin\System\UserController@avatar');
+    Router::put('/reset-password', 'App\Controller\Admin\System\UserController@resetPassword');
+    Router::get('', 'App\Controller\Admin\System\UserController@list');
+    Router::post('', 'App\Controller\Admin\System\UserController@create');
+    Router::get('/info', 'App\Controller\Admin\System\UserController@info');
+    Router::put('/{id}', 'App\Controller\Admin\System\UserController@update');
+    Router::delete('/{id}', 'App\Controller\Admin\System\UserController@delete');
+    Router::get('/{id}', 'App\Controller\Admin\System\UserController@getInfo');
+}, ['middleware' => [Phper666\JWTAuth\Middleware\JWTAuthMiddleware::class]]);
+
 
 Router::addGroup('/v1', function () {
     //刷新token

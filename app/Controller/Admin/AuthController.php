@@ -8,8 +8,6 @@ use App\Controller\AbstractController;
 use App\Model\User;
 use App\Request\Admin\UserResquest;
 use Phper666\JWTAuth\JWT;
-use Hyperf\HttpServer\Annotation\Controller;
-use Hyperf\HttpServer\Annotation\PostMapping;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Hyperf\HttpServer\Contract\ResponseInterface;
 use Psr\Http\Message\ResponseInterface as Psr7ResponseInterface;
@@ -17,6 +15,13 @@ use Psr\Http\Message\ResponseInterface as Psr7ResponseInterface;
 class AuthController extends AbstractController
 {
 
+    /**
+     * @param UserResquest $request
+     * @param ResponseInterface $response
+     * @param JWT $jwt
+     * @return Psr7ResponseInterface
+     * @throws \Psr\SimpleCache\InvalidArgumentException
+     */
     public function login(UserResquest $request, ResponseInterface $response, JWT $jwt): Psr7ResponseInterface
     {
         $data=[];
@@ -36,6 +41,12 @@ class AuthController extends AbstractController
         }
     }
 
+    /**
+     * @param ResponseInterface $response
+     * @param JWT $jwt
+     * @return Psr7ResponseInterface
+     * @throws \Psr\SimpleCache\InvalidArgumentException
+     */
     public function refreshToken( ResponseInterface $response, JWT $jwt): Psr7ResponseInterface
     {
         $token = (string)$jwt->refreshToken();
@@ -48,6 +59,12 @@ class AuthController extends AbstractController
         return $response->json(['message' => '操作成功','code' => 200, 'result' => $data])->withStatus(200);
     }
 
+    /**
+     * @param ResponseInterface $response
+     * @param JWT $jwt
+     * @return Psr7ResponseInterface
+     * @throws \Psr\SimpleCache\InvalidArgumentException
+     */
     public function logout( ResponseInterface $response, JWT $jwt): Psr7ResponseInterface
     {
         $jwt->logout();

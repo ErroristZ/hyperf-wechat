@@ -7,7 +7,7 @@ class ModelBase extends Model implements ModelInterface
     /**
      * 根据主键获取一个实体
      * @param  $id *主键
-     * @return static
+     * @return ModelBase|\Hyperf\Database\Model\Builder|\Hyperf\Database\Model\Model|object
      */
     public static function getFirstById($id)
     {
@@ -18,7 +18,7 @@ class ModelBase extends Model implements ModelInterface
      * 根据条件获取一个实体
      * @param array $where *条件数组
      * @param array $select *显示字段
-     * @return static
+     * @return ModelBase|\Hyperf\Database\Model\Builder|\Hyperf\Database\Model\Model|object
      */
     public static function getFirstByWhere(array $where, $select = ['*'])
     {
@@ -30,7 +30,7 @@ class ModelBase extends Model implements ModelInterface
      * @param array $where *条件数组
      * @param array $select *显示字段
      * @param bool $needToArray *是否序列化成数组
-     * @return static
+     * @return array
      */
     public static function getAllData(array $where, $select = ['*'], bool $needToArray = false)
     {
@@ -45,7 +45,7 @@ class ModelBase extends Model implements ModelInterface
     }
 
     /**
-     * 获取模型分页数据
+     * 获取模型分页数据 ?page=1&pageSize=10
      * @param array $where *条件数组
      * @param int $pageSize *页数
      * @param array $select *显示字段
