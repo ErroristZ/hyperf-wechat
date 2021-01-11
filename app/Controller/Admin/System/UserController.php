@@ -16,9 +16,18 @@ class UserController extends AbstractController
 
     }
 
-    public function create()
+    /**
+     * @param UserResquest $request
+     * @param ResponseInterface $response
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function create(UserResquest $request, ResponseInterface $response)
     {
+        if (User::create($request) === false) {
+            return $response->json(['message' => '操作失败','code' => 50015])->withStatus(403);
+        }
 
+        return $response->json(['message' => '操作成功','code' => 20000, 'result' => []])->withStatus(200);
     }
     public function update()
     {

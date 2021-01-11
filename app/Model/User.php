@@ -6,18 +6,18 @@ namespace App\Model;
 use Hyperf\Database\Model\SoftDeletes;
 use Hyperf\HttpServer\Contract\RequestInterface;
 /**
- * @property int $id 
- * @property string $name 
- * @property string $password 
- * @property string $hash 
- * @property string $nickname 
- * @property int $dept_id 
- * @property int $status 
- * @property string $avatar 
- * @property string $email 
- * @property int $create_time 
- * @property int $update_time 
- * @property int $delete_time 
+ * @property int $id
+ * @property string $name
+ * @property string $password
+ * @property string $hash
+ * @property string $nickname
+ * @property int $dept_id
+ * @property int $status
+ * @property string $avatar
+ * @property string $email
+ * @property int $create_time
+ * @property int $update_time
+ * @property int $delete_time
  */
 class User extends ModelBase implements ModelInterface
 {
@@ -69,6 +69,27 @@ class User extends ModelBase implements ModelInterface
         if (false === password_verify($userInfo['password'], $user->password)) {
             return false;
         }
+        return true;
+    }
+
+    /**
+     * @param RequestInterface $request
+     * @return bool
+     */
+    public static function create($request)
+    {
+        $userInfo = $request->all();
+
+        $data['name'] = $userInfo['name'];
+        $data['nickname'] = $userInfo['nickname'];
+        $data['status'] = $userInfo['status'];
+        $data['dept_id'] = $userInfo['dept_id'];
+        $data['password'] = password_hash($userInfo['password'], PASSWORD_BCRYPT);
+
+        if (!$user = User::query()->create($data)) {
+            return false;
+        }
+
         return true;
     }
 }

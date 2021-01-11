@@ -21,8 +21,40 @@ class UserResquest extends FormRequest
      */
     public function rules(): array
     {
-        return [
+        switch ($this->getMethod())
+        {
+            case 'POST':
+                return $this->getRegisterRules();
+                break;
+            case 'PUT':
+                return $this->getUpdateRules();
+                break;
+        }
+    }
 
+    /**
+     * @return string[]
+     */
+    private function getRegisterRules()
+    {
+        return  [
+            'name' => 'required|unique:user',
+            'nickname' => 'required|string|max:50',
+            'password' => 'required|alpha_dash|min:6',
+            'roles' => 'nullable|exists:roles,id',
+        ];
+    }
+
+    /**
+     * @return string[]
+     */
+    private function getUpdateRules()
+    {
+        return  [
+            'name' => 'required|unique:user',
+            'nickname' => 'required|string|max:50',
+            'password' => 'required|alpha_dash|min:6',
+            'roles' => 'nullable|exists:roles,id',
         ];
     }
 }
