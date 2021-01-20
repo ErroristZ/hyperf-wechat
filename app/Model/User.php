@@ -5,6 +5,7 @@ namespace App\Model;
 
 use Hyperf\Database\Model\SoftDeletes;
 use Hyperf\HttpServer\Contract\RequestInterface;
+use Donjan\Casbin\Enforcer;
 /**
  * @property int $id
  * @property string $name
@@ -86,9 +87,12 @@ class User extends ModelBase implements ModelInterface
         $data['dept_id'] = $userInfo['dept_id'];
         $data['password'] = password_hash($userInfo['password'], PASSWORD_BCRYPT);
 
+        //添加角色
         if (!$user = User::query()->create($data)) {
             return false;
         }
+        //绑定角色
+        Enforcer::addRoleForUser('user1', 'role1');
 
         return true;
     }

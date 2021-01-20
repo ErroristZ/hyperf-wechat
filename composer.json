@@ -27,7 +27,7 @@
         "hyperf/redis": "~2.0.0",
         "hyperf/database": "~2.0.0",
         "phper666/jwt-auth": "~3.0.0",
-        "overtrue/wechat": "~4.0",
+        "overtrue/permission": "~4.0",
         "hyperf/validation": "^2.0",
         "hyperf/constants": "^2.0",
         "hyperf/translation": "^2.0",

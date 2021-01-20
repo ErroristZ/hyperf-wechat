@@ -4,6 +4,7 @@ declare (strict_types=1);
 namespace App\Model;
 
 use Hyperf\Database\Model\SoftDeletes;
+use Hyperf\HttpServer\Contract\RequestInterface;
 
 /**
  * @property int $id 
@@ -58,4 +59,21 @@ class Permission extends ModelBase implements ModelInterface
      * @var array
      */
     protected $casts = ['id' => 'integer', 'pid' => 'integer', 'status' => 'integer', 'keepAlive' => 'integer', 'hidden' => 'integer', 'hideChildrenInMenu' => 'integer', 'action_type' => 'integer', 'blank' => 'integer', 'create_time' => 'integer', 'update_time' => 'integer', 'delete_time' => 'integer'];
+
+
+    /**
+     * @param RequestInterface $request
+     * @return bool
+     */
+    public static function create($request)
+    {
+        $data = $request->all();
+
+        //添加
+        if (!$info = Permission::query()->create($data)) {
+            return false;
+        }
+
+        return true;
+    }
 }

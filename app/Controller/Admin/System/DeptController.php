@@ -22,17 +22,16 @@ class DeptController extends AbstractController
     }
 
     /**
+     * @param DeptResquest $request
      * @param ResponseInterface $response
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function create(ResponseInterface $response)
+    public function create(DeptResquest $request,ResponseInterface $response)
     {
-        $data = Dept::getFirstById($this->request->route('id'));
-        if (!$data)
-        {
-            return $response->json(['message' => '部门不存在', 'result' => $data])->withStatus(403);
+        if (Dept::create($request) === false) {
+            return $response->json(['message' => '操作失败','code' => 50015])->withStatus(200);
         }
-        return $response->json(['message' => '操作成功','code' => 20000, 'result' => $data])->withStatus(200);
+        return $response->json(['message' => '操作成功','code' => 20000, 'result' => []])->withStatus(200);
     }
 
     /**

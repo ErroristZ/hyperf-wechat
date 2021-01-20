@@ -21,17 +21,16 @@ class PermissionController extends AbstractController
     }
 
     /**
+     * @param PermissionResquest $request
      * @param ResponseInterface $response
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function create(ResponseInterface $response)
+    public function create(PermissionResquest $request, ResponseInterface $response)
     {
-        $data = Permission::getFirstById($this->request->route('id'));
-        if (!$data)
-        {
-            return $response->json(['message' => '规则不存在', 'result' => $data])->withStatus(403);
+        if (Permission::create($request) === false) {
+            return $response->json(['message' => '操作失败','code' => 50015])->withStatus(200);
         }
-        return $response->json(['message' => '操作成功','code' => 20000, 'result' => $data])->withStatus(200);
+        return $response->json(['message' => '操作成功','code' => 20000, 'result' => []])->withStatus(200);
     }
 
     /**

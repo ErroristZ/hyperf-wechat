@@ -21,8 +21,46 @@ class RoleResquest extends FormRequest
      */
     public function rules(): array
     {
-        return [
+        switch ($this->getMethod())
+        {
+            case 'POST':
+                return $this->getRegisterRules();
+                break;
+            case 'PUT':
+                return $this->getUpdateRules();
+                break;
+        }
+    }
 
+    public function attributes(): array
+    {
+        return [
+            'id' => 'ID',
+        ];
+    }
+
+    private function getRegisterRules()
+    {
+        return  [
+            'name' => 'required|max:10',
+            'title' => 'nullable|string|between:2,100',
+        ];
+    }
+
+    private function getUpdateRules()
+    {
+        return  [
+            'name' => 'required|max:10',
+            'title' => 'nullable|string|between:2,100',
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'name.required' => '请填写名称',
+            'title' => '请填写标题',
+            'name.unique' => '名称已经存在'
         ];
     }
 }

@@ -33,17 +33,16 @@ class RoleController extends AbstractController
     }
 
     /**
+     * @param RoleResquest $request
      * @param ResponseInterface $response
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function create(ResponseInterface $response)
+    public function create(RoleResquest $request, ResponseInterface $response)
     {
-        $data = Role::getFirstById($this->request->route('id'));
-        if (!$data)
-        {
-            return $response->json(['message' => '角色不存在', 'result' => $data])->withStatus(403);
+        if (Role::create($request) === false) {
+            return $response->json(['message' => '操作失败','code' => 50015])->withStatus(200);
         }
-        return $response->json(['message' => '操作成功','code' => 20000, 'result' => $data])->withStatus(200);
+        return $response->json(['message' => '操作成功','code' => 20000, 'result' => []])->withStatus(200);
     }
 
     /**

@@ -52,17 +52,18 @@ class ArticleController extends AbstractController
     }
 
     /**
+     * @param ArticleResquest $request
      * @param ResponseInterface $response
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function create(ResponseInterface $response)
+    public function create(ArticleResquest $request, ResponseInterface $response)
     {
-        $data = Article::getFirstById($this->request->route('id'));
-        if (!$data)
-        {
-            return $response->json(['message' => '文章不存在', 'result' => $data])->withStatus(403);
+
+        if (Article::create($request) === false) {
+            return $response->json(['message' => '操作失败','code' => 50015])->withStatus(200);
         }
-        return $response->json(['message' => '操作成功','code' => 20000, 'result' => $data])->withStatus(200);
+
+        return $response->json(['message' => '操作成功','code' => 20000, 'result' => []])->withStatus(200);
     }
 
     /**

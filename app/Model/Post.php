@@ -3,8 +3,8 @@
 declare (strict_types=1);
 namespace App\Model;
 
-
 use Hyperf\Database\Model\SoftDeletes;
+use Hyperf\HttpServer\Contract\RequestInterface;
 
 /**
  * @property int $id 
@@ -47,4 +47,20 @@ class Post extends ModelBase implements ModelInterface
      * @var array
      */
     protected $casts = ['id' => 'integer', 'sort' => 'integer', 'status' => 'integer', 'create_time' => 'integer', 'update_time' => 'integer', 'delete_time' => 'integer'];
+
+    /**
+     * @param RequestInterface $request
+     * @return bool
+     */
+    public static function create($request)
+    {
+        $data = $request->all();
+
+        //添加
+        if (!$info = Post::query()->create($data)) {
+            return false;
+        }
+
+        return true;
+    }
 }

@@ -39,7 +39,7 @@ Router::addGroup('/article', function () {
 
     //文章列表
     Router::get('', 'App\Controller\Admin\System\ArticleController@list');
-    Router::post('/{id}', 'App\Controller\Admin\System\ArticleController@create');
+    Router::post('', 'App\Controller\Admin\System\ArticleController@create');
     Router::get('/{id}', 'App\Controller\Admin\System\ArticleController@info');
     Router::delete('/{id}', 'App\Controller\Admin\System\ArticleController@delete');
     Router::put('/{id}', 'App\Controller\Admin\System\ArticleController@update');

@@ -4,7 +4,6 @@ declare (strict_types=1);
 namespace App\Model;
 
 use Hyperf\Database\Model\SoftDeletes;
-use Hyperf\DbConnection\Model\Model;
 use Hyperf\HttpServer\Contract\RequestInterface;
 /**
  * @property int $id 
@@ -48,4 +47,20 @@ class Role extends ModelBase implements ModelInterface
      * @var array
      */
     protected $casts = ['id' => 'integer', 'pid' => 'integer', 'mode' => 'integer', 'status' => 'integer', 'create_time' => 'integer', 'update_time' => 'integer', 'delete_time' => 'integer'];
+
+    /**
+     * @param RequestInterface $request
+     * @return bool
+     */
+    public static function create($request)
+    {
+        $data = $request->all();
+
+        //添加
+        if (!$info = Role::query()->create($data)) {
+            return false;
+        }
+
+        return true;
+    }
 }
