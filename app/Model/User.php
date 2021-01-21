@@ -6,6 +6,7 @@ namespace App\Model;
 use Hyperf\Database\Model\SoftDeletes;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Donjan\Casbin\Enforcer;
+
 /**
  * @property int $id
  * @property string $name
@@ -62,7 +63,10 @@ class User extends ModelBase implements ModelInterface
      */
     public static function checkUser($request)
     {
+//        $request->header('USER_AGENT')
+
         $userInfo = $request->all();
+
         if (!$user = User::query()->where('name', $userInfo['name'])
             ->orWhere('email', $userInfo['name'])->first()) {
             return false;
@@ -70,6 +74,9 @@ class User extends ModelBase implements ModelInterface
         if (false === password_verify($userInfo['password'], $user->password)) {
             return false;
         }
+
+        (new \App\Service\Admin\UserService)->loginLog($user);
+
         return true;
     }
 
