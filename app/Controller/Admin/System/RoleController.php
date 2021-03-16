@@ -8,6 +8,7 @@ use App\Controller\AbstractController;
 use App\Model\Role;
 use App\Request\Admin\System\RoleResquest;
 use Hyperf\HttpServer\Contract\ResponseInterface;
+use App\Service\Admin\RoleService;
 
 class RoleController extends AbstractController
 {
@@ -39,7 +40,7 @@ class RoleController extends AbstractController
      */
     public function create(RoleResquest $request, ResponseInterface $response)
     {
-        if (Role::create($request) === false) {
+        if (RoleService::create($request) === false) {
             return $response->json(['message' => '操作失败','code' => 50015])->withStatus(200);
         }
         return $response->json(['message' => '操作成功','code' => 20000, 'result' => []])->withStatus(200);

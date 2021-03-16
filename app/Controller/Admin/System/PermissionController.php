@@ -8,6 +8,7 @@ use App\Controller\AbstractController;
 use App\Model\Permission;
 use App\Request\Admin\System\PermissionResquest;
 use Hyperf\HttpServer\Contract\ResponseInterface;
+use App\Service\Admin\PermissionService;
 
 class PermissionController extends AbstractController
 {    /**
@@ -27,7 +28,7 @@ class PermissionController extends AbstractController
      */
     public function create(PermissionResquest $request, ResponseInterface $response)
     {
-        if (Permission::create($request) === false) {
+        if (PermissionService::create($request) === false) {
             return $response->json(['message' => '操作失败','code' => 50015])->withStatus(200);
         }
         return $response->json(['message' => '操作成功','code' => 20000, 'result' => []])->withStatus(200);

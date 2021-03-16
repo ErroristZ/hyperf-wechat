@@ -7,6 +7,7 @@ namespace App\Controller\Admin\System;
 use App\Controller\AbstractController;
 use App\Model\Article;
 use App\Request\Admin\System\ArticleResquest;
+use App\Service\Admin\ArticleService;
 use Hyperf\HttpServer\Contract\ResponseInterface;
 
 class ArticleController extends AbstractController
@@ -59,7 +60,7 @@ class ArticleController extends AbstractController
     public function create(ArticleResquest $request, ResponseInterface $response)
     {
 
-        if (Article::create($request) === false) {
+        if (ArticleService::create($request) === false) {
             return $response->json(['message' => '操作失败','code' => 50015])->withStatus(200);
         }
 

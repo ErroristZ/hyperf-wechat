@@ -35,26 +35,26 @@ class UserResquest extends FormRequest
     /**
      * @return string[]
      */
-    private function getRegisterRules()
+    private function getRegisterRules(): array
     {
         return  [
             'name' => 'required|unique:user',
             'nickname' => 'required|string|max:50',
             'password' => 'required|alpha_dash|min:6',
-            'roles' => 'nullable|exists:roles,id',
+            'roles' => 'required',
         ];
     }
 
     /**
      * @return string[]
      */
-    private function getUpdateRules()
+    private function getUpdateRules(): array
     {
         return  [
             'name' => 'required|unique:user',
             'nickname' => 'required|string|max:50',
             'password' => 'required|alpha_dash|min:6',
-            'roles' => 'nullable|exists:roles,id',
+            'roles' => 'required',
         ];
     }
 }

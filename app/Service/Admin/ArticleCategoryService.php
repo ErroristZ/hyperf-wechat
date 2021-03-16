@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Service\Admin;
 
-use App\Model\Article;
+use App\Model\ArticleCategory;
 use Hyperf\HttpServer\Contract\RequestInterface;
 
-class ArticleService
+class ArticleCategoryService
 {
     /**
      * @param RequestInterface $request
@@ -17,14 +17,12 @@ class ArticleService
     {
         $Info = $request->all();
 
-        $data['title'] = $Info['title'];
-        $data['image'] = $Info['image'];
-        $data['category_id'] = $Info['category_id'];
-        $data['content'] = $Info['content'];
-        $data['top'] = $Info['top'];
+        $data['disable'] = $Info['disable'];
+        $data['name'] = $Info['name'];
+        $data['pid'] = $Info['pid'];
 
         //添加
-        if (!$info = Article::query()->create($data)) {
+        if (!$info = ArticleCategory::query()->create($data)) {
             return false;
         }
 

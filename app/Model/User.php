@@ -4,8 +4,6 @@ declare (strict_types=1);
 namespace App\Model;
 
 use Hyperf\Database\Model\SoftDeletes;
-use Hyperf\HttpServer\Contract\RequestInterface;
-use Donjan\Casbin\Enforcer;
 
 /**
  * @property int $id
@@ -57,50 +55,4 @@ class User extends ModelBase implements ModelInterface
     protected $casts = ['id' => 'integer', 'dept_id' => 'integer', 'status' => 'integer', 'create_time' => 'integer', 'update_time' => 'integer', 'delete_time' => 'integer'];
 
     protected $hidden=['password'];
-
-    /**
-     * @param  RequestInterface $request
-     */
-    public static function checkUser($request)
-    {
-//        $request->header('USER_AGENT')
-
-        $userInfo = $request->all();
-
-        if (!$user = User::query()->where('name', $userInfo['name'])
-            ->orWhere('email', $userInfo['name'])->first()) {
-            return false;
-        }
-        if (false === password_verify($userInfo['password'], $user->password)) {
-            return false;
-        }
-
-        (new \App\Service\Admin\UserService)->loginLog($user);
-
-        return true;
-    }
-
-    /**
-     * @param RequestInterface $request
-     * @return bool
-     */
-    public static function create($request)
-    {
-        $userInfo = $request->all();
-
-        $data['name'] = $userInfo['name'];
-        $data['nickname'] = $userInfo['nickname'];
-        $data['status'] = $userInfo['status'];
-        $data['dept_id'] = $userInfo['dept_id'];
-        $data['password'] = password_hash($userInfo['password'], PASSWORD_BCRYPT);
-
-        //添加角色
-        if (!$user = User::query()->create($data)) {
-            return false;
-        }
-        //绑定角色
-        Enforcer::addRoleForUser('user1', 'role1');
-
-        return true;
-    }
 }

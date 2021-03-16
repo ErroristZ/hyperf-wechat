@@ -8,6 +8,7 @@ use App\Controller\AbstractController;
 use App\Model\ArticleCategory;
 use App\Request\Admin\System\ArticleCategoryResquest;
 use Hyperf\HttpServer\Contract\ResponseInterface;
+use App\Service\Admin\ArticleCategoryService;
 
 class ArticleCategoryController extends AbstractController
 {
@@ -28,7 +29,7 @@ class ArticleCategoryController extends AbstractController
      */
     public function create(ArticleCategoryResquest $request, ResponseInterface $response)
     {
-        if (ArticleCategory::create($request) === false) {
+        if (ArticleCategoryService::create($request) === false) {
             return $response->json(['message' => '操作失败','code' => 50015])->withStatus(200);
         }
         return $response->json(['message' => '操作成功','code' => 20000, 'result' => []])->withStatus(200);

@@ -40,9 +40,9 @@ class UserLoginListener implements ListenerInterface
         Log::create([
             'user_id'    => $event->user->id,
             'action'     => '登录',
-            'url'        => $event->user->id,
-            'ip'         => $event->user->id,
-            'user_agent' => $event->user->id,
+            'url'        => $event->user->url,
+            'ip'         => $event->user->ip,
+            'user_agent' => $event->user->header,
         ]);
     }
 }

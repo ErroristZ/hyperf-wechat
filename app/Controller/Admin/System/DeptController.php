@@ -8,6 +8,7 @@ use App\Controller\AbstractController;
 use App\Model\Dept;
 use App\Request\Admin\System\DeptResquest;
 use Hyperf\HttpServer\Contract\ResponseInterface;
+use App\Service\Admin\DeptService;
 
 class DeptController extends AbstractController
 {
@@ -28,7 +29,7 @@ class DeptController extends AbstractController
      */
     public function create(DeptResquest $request,ResponseInterface $response)
     {
-        if (Dept::create($request) === false) {
+        if (DeptService::create($request) === false) {
             return $response->json(['message' => '操作失败','code' => 50015])->withStatus(200);
         }
         return $response->json(['message' => '操作成功','code' => 20000, 'result' => []])->withStatus(200);

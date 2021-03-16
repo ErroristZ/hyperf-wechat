@@ -8,6 +8,7 @@ use App\Controller\AbstractController;
 use App\Model\Post;
 use App\Request\Admin\System\PostResquest;
 use Hyperf\HttpServer\Contract\ResponseInterface;
+use App\Service\Admin\PostService;
 
 class PostController extends AbstractController
 {
@@ -28,7 +29,7 @@ class PostController extends AbstractController
      */
     public function create(PostResquest $request, ResponseInterface $response)
     {
-        if (Post::create($request) === false) {
+        if (PostService::create($request) === false) {
             return $response->json(['message' => '操作失败','code' => 50015])->withStatus(200);
         }
         return $response->json(['message' => '操作成功','code' => 20000, 'result' => []])->withStatus(200);

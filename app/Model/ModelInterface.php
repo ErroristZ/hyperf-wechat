@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Model;
+use errorist\Permission\Contract\User;
 
 interface ModelInterface
 {

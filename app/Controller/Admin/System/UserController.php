@@ -6,6 +6,7 @@ namespace App\Controller\Admin\System;
 
 use App\Controller\AbstractController;
 use App\Model\User;
+use App\Service\Admin\UserService;
 use App\Request\Admin\System\UserResquest;
 use Hyperf\HttpServer\Contract\ResponseInterface;
 
@@ -23,7 +24,7 @@ class UserController extends AbstractController
      */
     public function create(UserResquest $request, ResponseInterface $response)
     {
-        if (User::create($request) === false) {
+        if (UserService::create($request) === false) {
             return $response->json(['message' => '操作失败','code' => 50015])->withStatus(403);
         }
 
