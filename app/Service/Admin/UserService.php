@@ -29,7 +29,6 @@ class UserService
      */
     public static function checkUser($request)
     {
-
         $userInfo = $request->all();
 
         if (!$user = User::query()->where('name', $userInfo['name'])
