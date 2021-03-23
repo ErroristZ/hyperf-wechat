@@ -58,30 +58,37 @@ class UserController extends AbstractController
 
         return $response->json(['message' => '操作成功','code' => 20000, 'result' => []])->withStatus(200);
     }
+
     public function info()
     {
 
     }
+
     public function current()
     {
 
     }
+
     public function updateCurrent()
     {
 
     }
+
     public function avatar()
     {
 
     }
+
     public function resetPassword()
     {
 
     }
+
     public function data()
     {
 
     }
+    
     public function getInfo()
     {
 
