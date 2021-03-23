@@ -30,13 +30,33 @@ class UserController extends AbstractController
 
         return $response->json(['message' => '操作成功','code' => 20000, 'result' => []])->withStatus(200);
     }
-    public function update()
-    {
 
+    /**
+     * @param UserResquest $request
+     * @param ResponseInterface $response
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function update(UserResquest $request, ResponseInterface $response)
+    {
+        if (UserService::update($request) === false) {
+            return $response->json(['message' => '操作失败','code' => 50015])->withStatus(403);
+        }
+
+        return $response->json(['message' => '操作成功','code' => 20000, 'result' => []])->withStatus(200);
     }
-    public function delete()
-    {
 
+    /**
+     * @param UserResquest $request
+     * @param ResponseInterface $response
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function delete(UserResquest $request, ResponseInterface $response)
+    {
+        if (UserService::delete($request) === false) {
+            return $response->json(['message' => '操作失败','code' => 50015])->withStatus(403);
+        }
+
+        return $response->json(['message' => '操作成功','code' => 20000, 'result' => []])->withStatus(200);
     }
     public function info()
     {
