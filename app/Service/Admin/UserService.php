@@ -71,15 +71,21 @@ class UserService
         //绑定角色
         (new self)->bindRole($user, $userInfo['roles']);
 
+
+        if (!empty($userInfo['posts'])) {
+            //绑定岗位
+            (new self)->bindPost($user, $userInfo['posts']);
+        }
+
         return true;
     }
 
     /**
-     * @param \errorist\Permission\Contract\User $user
+     * @param \errorist\Permission\Traits\User $user
      * @param array $roles
      * @noinspection CallableParameterUseCaseInTypeContextInspection
      */
-    public function bindRole(\errorist\Permission\Contract\User $user, array $roles): void
+    public function bindRole(\errorist\Permission\Traits\User $user, array $roles): void
     {
         //绑定角色
         $roles = Role::whereIn('id', $roles)->get();
@@ -87,5 +93,14 @@ class UserService
         foreach ($roles as $role) {
             $user->assignRole($role);
         }
+    }
+
+    /**
+     * @param User $user
+     * @param $post
+     */
+    protected function bindPost(User $user, $post)
+    {
+
     }
 }

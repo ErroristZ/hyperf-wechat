@@ -88,7 +88,7 @@ class UserController extends AbstractController
     {
 
     }
-    
+
     public function getInfo()
     {
 
