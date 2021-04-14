@@ -37,11 +37,9 @@
         "hyperf/model-cache": "^2.0",
         "hyperf/async-queue": "^2.0",
         "phpmd/phpmd": "^2.9",
-        "donjan-deng/hyperf-permission": "^2.0",
         "hyperf/event": "v2.0.0",
         "naixiaoxin/hyperf-wechat": "^1.1",
-        "errorist/hyperf-permission": "dev-main",
-      "ext-json": "*"
+        "ext-json": "*"
     },
     "require-dev": {
         "swoole/ide-helper": "^4.5",
