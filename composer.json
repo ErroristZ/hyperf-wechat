@@ -39,7 +39,8 @@
         "phpmd/phpmd": "^2.9",
         "hyperf/event": "v2.0.0",
         "naixiaoxin/hyperf-wechat": "^1.1",
-        "ext-json": "*"
+        "ext-json": "*",
+        "donjan-deng/hyperf-casbin": "^3.0"
     },
     "require-dev": {
         "swoole/ide-helper": "^4.5",

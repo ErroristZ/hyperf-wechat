@@ -34,6 +34,24 @@ private static $installed = array (
   ),
   'versions' => 
   array (
+    'casbin/casbin' => 
+    array (
+      'pretty_version' => 'v3.1.1',
+      'version' => '3.1.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '71fd830c33895825b1fc4e57d340e0ac2dc949e3',
+    ),
+    'casbin/psr3-bridge' => 
+    array (
+      'pretty_version' => 'v1.3.0',
+      'version' => '1.3.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '846be79ddb0cbf1bcc85f0f63879cf966538ad36',
+    ),
     'composer/semver' => 
     array (
       'pretty_version' => '3.2.4',
@@ -101,6 +119,15 @@ private static $installed = array (
       array (
       ),
       'reference' => 'e864bbf5904cb8f5bb334f99209b48018522f042',
+    ),
+    'donjan-deng/hyperf-casbin' => 
+    array (
+      'pretty_version' => '3.0.0',
+      'version' => '3.0.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '4db88a66c6c02b703411d6c13af8fa2e9f3e0980',
     ),
     'easywechat-composer/easywechat-composer' => 
     array (
@@ -948,6 +975,15 @@ private static $installed = array (
       ),
       'reference' => 'c4e8a59946bad694ab5682a76e7884a9157a8a2c',
     ),
+    's1lentium/iptools' => 
+    array (
+      'pretty_version' => 'v1.1.1',
+      'version' => '1.1.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'f6f8ab6132ca7443bd7cced1681f5066d725fd5f',
+    ),
     'sebastian/code-unit-reverse-lookup' => 
     array (
       'pretty_version' => '1.0.2',
@@ -1141,6 +1177,15 @@ private static $installed = array (
       array (
         0 => '2.0',
       ),
+    ),
+    'symfony/expression-language' => 
+    array (
+      'pretty_version' => 'v5.2.4',
+      'version' => '5.2.4.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '3fc560e62bc5121751b792b11505db03a12cf83c',
     ),
     'symfony/filesystem' => 
     array (
